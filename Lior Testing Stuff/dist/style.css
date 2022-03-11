@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+body .meteor {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 5000ms ease-in-out;
+  animation-name: rotate360;
+}
+body .meteor img {
+  width: 100px;
+  border: 1px solid black;
+}
+
+@keyframes rotate360 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.meteor img {
+  animation: 10s rotate360 infinite linear;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.explostion {
+  width: 100px;
+  position: absolute;
+}
