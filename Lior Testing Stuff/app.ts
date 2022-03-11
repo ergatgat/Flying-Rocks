@@ -157,15 +157,6 @@ function setRandomRotate(){
     })
 }
 
-function createExplostion(){
-    const newExplostion = document.createElement('img')
-    newExplostion.classList.add('explostion')
-    newExplostion.src = "images/explosion-transparent-png-picture-1.png";
-    newExplostion.style.top = `${explosionPositionTop}px`
-    newExplostion.style.left = `${explosionPositionLeft}px`
-    wrapper.appendChild(newExplostion);
-}
-
 moveMeteors();
 setRandomRotate();
 setInterval(moveMeteors,5000)
