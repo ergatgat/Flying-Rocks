@@ -9,9 +9,20 @@ body{
     position: relative;
     .meteor{
         position: absolute;
+        // border: 1px solid black;
+        // width: 100px;
+        // height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 5000ms ease-in-out;
         img{
             width: 100px;
             border: 1px solid black;
         }
+    }
+    .explotion{
+        background-image: url(images/explosion-transparent-png-picture-1.png);
+        background-size: 250px;
     }
 }

@@ -11,8 +11,16 @@ body {
 }
 body .meteor {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 5000ms ease-in-out;
 }
 body .meteor img {
   width: 100px;
   border: 1px solid black;
+}
+body .explotion {
+  background-image: url(images/explosion-transparent-png-picture-1.png);
+  background-size: 250px;
 }
