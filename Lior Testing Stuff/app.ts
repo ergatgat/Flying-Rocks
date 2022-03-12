@@ -36,7 +36,9 @@ function checkCollision() {
         for (let j = 1; j < meteorPosition.length; j++) {
             if (i === j) {
                 break;
-            } else if (meteorPosition[i].leftPosition >= meteorPosition[j].leftPosition &&
+            }else if (typeof i === 'undefined') {
+                break
+            }else if (meteorPosition[i].leftPosition >= meteorPosition[j].leftPosition &&
                 meteorPosition[i].leftPosition <= meteorPosition[j].rightPosition) {
                 if (meteorPosition[i].topPosition >= meteorPosition[j].topPosition &&
                     meteorPosition[i].topPosition <= meteorPosition[j].bottomPosition) {
@@ -59,6 +61,8 @@ function checkCollision() {
                             newExplostion.remove()
                             isExpolded = false;
                         },100)
+                        meteors[i].removeChild
+                        meteors[j].removeChild
                     }
 
                 } else if (meteorPosition[i].bottomPosition >= meteorPosition[j].topPosition &&

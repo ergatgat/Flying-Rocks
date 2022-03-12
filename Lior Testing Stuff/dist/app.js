@@ -33,6 +33,9 @@ function checkCollision() {
             if (i === j) {
                 return "break";
             }
+            else if (typeof i === 'undefined') {
+                return "break";
+            }
             else if (meteorPosition[i].leftPosition >= meteorPosition[j].leftPosition &&
                 meteorPosition[i].leftPosition <= meteorPosition[j].rightPosition) {
                 if (meteorPosition[i].topPosition >= meteorPosition[j].topPosition &&
@@ -53,6 +56,8 @@ function checkCollision() {
                             newExplostion_1.remove();
                             isExpolded = false;
                         }, 100);
+                        meteors[i].removeChild;
+                        meteors[j].removeChild;
                     }
                 }
                 else if (meteorPosition[i].bottomPosition >= meteorPosition[j].topPosition &&
