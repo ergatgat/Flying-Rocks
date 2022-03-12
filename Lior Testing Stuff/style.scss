@@ -7,6 +7,9 @@ body{
     width: 100vw;
     height: 100vh;
     position: relative;
+    background-image: url('images/Background.jpg');
+    background-size: cover;
+   
     .meteor{
         position: absolute;
         // border: 1px solid black;
@@ -19,7 +22,6 @@ body{
         animation-name: rotate360;
         img{
             width: 100px;
-            border: 1px solid black;
         }
     }
 }
@@ -36,9 +38,17 @@ body{
 
 .wrapper{
     position: relative;
+    height: 90%;
 }
 
 .explostion{
-    width: 200px;
+    width: 150px;
     position: absolute;
+}
+
+#spaceShip{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+
 }

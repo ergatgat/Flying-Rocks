@@ -8,6 +8,8 @@ body {
   width: 100vw;
   height: 100vh;
   position: relative;
+  background-image: url("images/Background.jpg");
+  background-size: cover;
 }
 body .meteor {
   position: absolute;
@@ -19,7 +21,6 @@ body .meteor {
 }
 body .meteor img {
   width: 100px;
-  border: 1px solid black;
 }
 
 @keyframes rotate360 {
@@ -33,9 +34,16 @@ body .meteor img {
 
 .wrapper {
   position: relative;
+  height: 90%;
 }
 
 .explostion {
-  width: 200px;
+  width: 150px;
   position: absolute;
+}
+
+#spaceShip {
+  position: absolute;
+  top: 80%;
+  left: 50%;
 }

@@ -42,6 +42,8 @@ function checkCollision() {
                     meteorPosition[i].topPosition <= meteorPosition[j].bottomPosition) {
                     // Add Explostion and Remove divs
                     console.log(`${i} and ${j} Are overlapping at X and Y`)
+                    
+
                     if(!isExpolded){
                         isExpolded = true;
                         const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
@@ -53,8 +55,6 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        meteors[i].remove()
-                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
@@ -65,7 +65,7 @@ function checkCollision() {
                     meteorPosition[i].bottomPosition <= meteorPosition[j].bottomPosition) {
                     // Add Explostion and Remove divs
                     console.log(`${i} and ${j} Are overlapping at X and Y`)
-                    
+
                     if(!isExpolded){
                         isExpolded = true;
                         const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
@@ -77,14 +77,11 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        meteors[i].remove()
-                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
                         },100)
                     }
-
                 }
             } else if (meteorPosition[i].rightPosition >= meteorPosition[j].leftPosition &&
                 meteorPosition[i].rightPosition <= meteorPosition[j].rightPosition) {
@@ -92,7 +89,6 @@ function checkCollision() {
                     meteorPosition[i].bottomPosition <= meteorPosition[j].bottomPosition) {
                     // Add Explostion and Remove divs
                     console.log(`${i} and ${j} Are overlapping at X and Y`)
-                    
                     if(!isExpolded){
                         isExpolded = true;
                         const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
@@ -104,8 +100,6 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        meteors[i].remove()
-                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
@@ -128,8 +122,6 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        meteors[i].remove()
-                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;

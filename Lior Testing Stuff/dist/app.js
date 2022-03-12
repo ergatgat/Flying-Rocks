@@ -49,8 +49,6 @@ function checkCollision() {
                         newExplostion_1.style.top = explosionPositionTop + "px";
                         newExplostion_1.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_1);
-                        meteors[i].remove();
-                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_1.remove();
                             isExpolded = false;
@@ -71,8 +69,6 @@ function checkCollision() {
                         newExplostion_2.style.top = explosionPositionTop + "px";
                         newExplostion_2.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_2);
-                        meteors[i].remove();
-                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_2.remove();
                             isExpolded = false;
@@ -96,8 +92,6 @@ function checkCollision() {
                         newExplostion_3.style.top = explosionPositionTop + "px";
                         newExplostion_3.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_3);
-                        meteors[i].remove();
-                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_3.remove();
                             isExpolded = false;
@@ -118,8 +112,6 @@ function checkCollision() {
                         newExplostion_4.style.top = explosionPositionTop + "px";
                         newExplostion_4.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_4);
-                        meteors[i].remove();
-                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_4.remove();
                             isExpolded = false;
