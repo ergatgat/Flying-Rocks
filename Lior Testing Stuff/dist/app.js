@@ -41,14 +41,16 @@ function checkCollision() {
                     console.log(i + " and " + j + " Are overlapping at X and Y");
                     if (!isExpolded) {
                         isExpolded = true;
-                        var explosionPositionTop = meteorPosition[i].topPosition;
-                        var explosionPositionLeft = meteorPosition[i].leftPosition;
+                        var explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                        var explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
                         var newExplostion_1 = document.createElement('img');
                         newExplostion_1.classList.add('explostion');
                         newExplostion_1.src = "images/explosion-transparent-png-picture-1.png";
                         newExplostion_1.style.top = explosionPositionTop + "px";
                         newExplostion_1.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_1);
+                        meteors[i].remove();
+                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_1.remove();
                             isExpolded = false;
@@ -61,14 +63,16 @@ function checkCollision() {
                     console.log(i + " and " + j + " Are overlapping at X and Y");
                     if (!isExpolded) {
                         isExpolded = true;
-                        var explosionPositionTop = meteorPosition[i].topPosition;
-                        var explosionPositionLeft = meteorPosition[i].leftPosition;
+                        var explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                        var explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
                         var newExplostion_2 = document.createElement('img');
                         newExplostion_2.classList.add('explostion');
                         newExplostion_2.src = "images/explosion-transparent-png-picture-1.png";
                         newExplostion_2.style.top = explosionPositionTop + "px";
                         newExplostion_2.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_2);
+                        meteors[i].remove();
+                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_2.remove();
                             isExpolded = false;
@@ -84,14 +88,16 @@ function checkCollision() {
                     console.log(i + " and " + j + " Are overlapping at X and Y");
                     if (!isExpolded) {
                         isExpolded = true;
-                        var explosionPositionTop = meteorPosition[i].topPosition;
-                        var explosionPositionLeft = meteorPosition[i].leftPosition;
+                        var explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                        var explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
                         var newExplostion_3 = document.createElement('img');
                         newExplostion_3.classList.add('explostion');
                         newExplostion_3.src = "images/explosion-transparent-png-picture-1.png";
                         newExplostion_3.style.top = explosionPositionTop + "px";
                         newExplostion_3.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_3);
+                        meteors[i].remove();
+                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_3.remove();
                             isExpolded = false;
@@ -104,14 +110,16 @@ function checkCollision() {
                     console.log(i + " and " + j + " Are overlapping at X and Y");
                     if (!isExpolded) {
                         isExpolded = true;
-                        var explosionPositionTop = meteorPosition[i].topPosition;
-                        var explosionPositionLeft = meteorPosition[i].leftPosition;
+                        var explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                        var explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
                         var newExplostion_4 = document.createElement('img');
                         newExplostion_4.classList.add('explostion');
                         newExplostion_4.src = "images/explosion-transparent-png-picture-1.png";
                         newExplostion_4.style.top = explosionPositionTop + "px";
                         newExplostion_4.style.left = explosionPositionLeft + "px";
                         wrapper.appendChild(newExplostion_4);
+                        meteors[i].remove();
+                        meteors[j].remove();
                         setTimeout(function () {
                             newExplostion_4.remove();
                             isExpolded = false;

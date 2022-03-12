@@ -44,8 +44,8 @@ function checkCollision() {
                     console.log(`${i} and ${j} Are overlapping at X and Y`)
                     if(!isExpolded){
                         isExpolded = true;
-                        const explosionPositionTop =  meteorPosition[i].topPosition;
-                        const explosionPositionLeft = meteorPosition[i].leftPosition;
+                        const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
+                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition)/2;
     
                         const newExplostion = document.createElement('img')
                         newExplostion.classList.add('explostion')
@@ -53,7 +53,8 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        
+                        meteors[i].remove()
+                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
@@ -67,8 +68,8 @@ function checkCollision() {
                     
                     if(!isExpolded){
                         isExpolded = true;
-                        const explosionPositionTop =  meteorPosition[i].topPosition;
-                        const explosionPositionLeft = meteorPosition[i].leftPosition;
+                        const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
+                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition)/2;
     
                         const newExplostion = document.createElement('img')
                         newExplostion.classList.add('explostion')
@@ -76,7 +77,8 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        
+                        meteors[i].remove()
+                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
@@ -93,8 +95,8 @@ function checkCollision() {
                     
                     if(!isExpolded){
                         isExpolded = true;
-                        const explosionPositionTop =  meteorPosition[i].topPosition;
-                        const explosionPositionLeft = meteorPosition[i].leftPosition;
+                        const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
+                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition)/2;
     
                         const newExplostion = document.createElement('img')
                         newExplostion.classList.add('explostion')
@@ -102,7 +104,8 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        
+                        meteors[i].remove()
+                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
@@ -116,8 +119,8 @@ function checkCollision() {
 
                     if(!isExpolded){
                         isExpolded = true;
-                        const explosionPositionTop =  meteorPosition[i].topPosition;
-                        const explosionPositionLeft = meteorPosition[i].leftPosition;
+                        const explosionPositionTop =  (meteorPosition[i].topPosition + meteorPosition[j].topPosition)/2;
+                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition)/2;
     
                         const newExplostion = document.createElement('img')
                         newExplostion.classList.add('explostion')
@@ -125,7 +128,8 @@ function checkCollision() {
                         newExplostion.style.top = `${explosionPositionTop}px`
                         newExplostion.style.left = `${explosionPositionLeft}px`
                         wrapper.appendChild(newExplostion);
-                        
+                        meteors[i].remove()
+                        meteors[j].remove()
                         setTimeout(()=>{
                             newExplostion.remove()
                             isExpolded = false;
