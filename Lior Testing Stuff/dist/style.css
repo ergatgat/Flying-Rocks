@@ -20,7 +20,7 @@ body .meteor {
   animation-name: rotate360;
 }
 body .meteor img {
-  width: 100px;
+  width: 90px;
 }
 
 @keyframes rotate360 {
@@ -38,7 +38,7 @@ body .meteor img {
 }
 
 .explostion {
-  width: 150px;
+  width: 125px;
   position: absolute;
 }
 

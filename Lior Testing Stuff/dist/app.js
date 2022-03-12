@@ -146,5 +146,6 @@ function setRandomRotate() {
     });
 }
 moveMeteors();
+setTimeout(moveMeteors, 500);
 setRandomRotate();
 setInterval(moveMeteors, 5000);
