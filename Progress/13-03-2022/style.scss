@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-image: url('images/Background.jpg');
+    background-size: cover;
+   
+    .meteor{
+        position: absolute;
+        // border: 1px solid black;
+        // width: 100px;
+        // height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 5000ms ease-in-out;
+        animation-name: rotate360;
+        img{
+            width: 90px;
+        }
+    }
+}
+
+@keyframes rotate360 {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.meteor img {
+    animation: 10s rotate360 infinite linear;
+}
+
+.wrapper{
+    position: relative;
+    height: 90%;
+}
+
+.explostion{
+    width: 125px;
+    position: absolute;
+}
+
+#spaceShip{
+    position: absolute;
+    top: 80%;
+    left: 50%;
+
+}
