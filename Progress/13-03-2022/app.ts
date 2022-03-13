@@ -12,6 +12,7 @@ function getMeteorPosition(meteors: NodeList): object {
             rightPosition: element.getBoundingClientRect().right,
             topPosition: element.getBoundingClientRect().top,
             bottomPosition: element.getBoundingClientRect().bottom,
+            display: true // true -> display is shown false -> display is hidden
         }
         ourMeteors.push(meteor)
     })
