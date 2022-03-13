@@ -1,6 +1,6 @@
 const meteors: NodeList = document.querySelectorAll('.meteor')
-const spaceship:HTMLDivElement = document.querySelector('#spaceShip')
-const body:HTMLBodyElement = document.querySelector('body')
+const spaceship: HTMLDivElement = document.querySelector('#spaceShip')
+const body: HTMLBodyElement = document.querySelector('body')
 const wrapper: HTMLDivElement = document.querySelector('.wrapper')
 
 // function gets meteors and returns each meteor position
@@ -12,7 +12,6 @@ function getMeteorPosition(meteors: NodeList): object {
             rightPosition: element.getBoundingClientRect().right,
             topPosition: element.getBoundingClientRect().top,
             bottomPosition: element.getBoundingClientRect().bottom,
-            display: true // true -> display is shown false -> display is hidden
         }
         ourMeteors.push(meteor)
     })
@@ -36,106 +35,115 @@ function checkCollision() {
     let isExpolded: boolean = false
     for (let i = 0; i < meteorPosition.length; i++) {
         for (let j = 1; j < meteorPosition.length; j++) {
-            if (i === j) {
-                break;
-            } else if (typeof i === 'undefined') {
-                break
-            } else if (meteorPosition[i].leftPosition >= meteorPosition[j].leftPosition &&
-                meteorPosition[i].leftPosition <= meteorPosition[j].rightPosition) {
-                if (meteorPosition[i].topPosition >= meteorPosition[j].topPosition &&
-                    meteorPosition[i].topPosition <= meteorPosition[j].bottomPosition) {
-                    // Add Explostion and Remove divs
-                    console.log(`${i} and ${j} Are overlapping at X and Y`)
+            if (!meteors[i].classList.contains("hidden")) {
+                if (i === j) {
+                    break;
+                } else if (typeof i === 'undefined') {
+                    break
+                } else if (meteorPosition[i].leftPosition >= meteorPosition[j].leftPosition &&
+                    meteorPosition[i].leftPosition <= meteorPosition[j].rightPosition) {
+                    if (meteorPosition[i].topPosition >= meteorPosition[j].topPosition &&
+                        meteorPosition[i].topPosition <= meteorPosition[j].bottomPosition) {
+                        // Add Explostion and Remove divs
+                        console.log(`${i} and ${j} Are overlapping at X and Y`)
 
 
-                    if (!isExpolded) {
-                        isExpolded = true;
-                        const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
-                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
+                        if (!isExpolded) {
+                            isExpolded = true;
+                            const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                            const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
 
-                        const newExplostion = document.createElement('img')
-                        newExplostion.classList.add('explostion')
-                        newExplostion.src = "images/explosion-transparent-png-picture-1.png";
-                        newExplostion.style.top = `${explosionPositionTop}px`
-                        newExplostion.style.left = `${explosionPositionLeft}px`
-                        wrapper.appendChild(newExplostion);
-                        setTimeout(() => {
-                            newExplostion.remove()
-                            isExpolded = false;
-                        }, 100)
-                        meteors[i].removeChild
-                        meteors[j].removeChild
+                            const newExplostion = document.createElement('img')
+                            newExplostion.classList.add('explostion')
+                            newExplostion.src = "images/explosion-transparent-png-picture-1.png";
+                            newExplostion.style.top = `${explosionPositionTop}px`
+                            newExplostion.style.left = `${explosionPositionLeft}px`
+                            wrapper.appendChild(newExplostion);
+                            setTimeout(() => {
+                                newExplostion.remove()
+                                isExpolded = false;
+                            }, 100)
+                            meteors[i].classList.add("hidden")
+                            meteors[j].classList.add("hidden")
+
+                        }
+
+                    } else if (meteorPosition[i].bottomPosition >= meteorPosition[j].topPosition &&
+                        meteorPosition[i].bottomPosition <= meteorPosition[j].bottomPosition) {
+                        // Add Explostion and Remove divs
+                        console.log(`${i} and ${j} Are overlapping at X and Y`)
+
+                        if (!isExpolded) {
+                            isExpolded = true;
+                            const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                            const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
+
+                            const newExplostion = document.createElement('img')
+                            newExplostion.classList.add('explostion')
+                            newExplostion.src = "images/explosion-transparent-png-picture-1.png";
+                            newExplostion.style.top = `${explosionPositionTop}px`
+                            newExplostion.style.left = `${explosionPositionLeft}px`
+                            wrapper.appendChild(newExplostion);
+                            setTimeout(() => {
+                                newExplostion.remove()
+                                isExpolded = false;
+                            }, 100)
+                            meteors[i].classList.add("hidden")
+                            meteors[j].classList.add("hidden")
+                        }
                     }
+                } else if (meteorPosition[i].rightPosition >= meteorPosition[j].leftPosition &&
+                    meteorPosition[i].rightPosition <= meteorPosition[j].rightPosition) {
+                    if (meteorPosition[i].bottomPosition >= meteorPosition[j].topPosition &&
+                        meteorPosition[i].bottomPosition <= meteorPosition[j].bottomPosition) {
+                        // Add Explostion and Remove divs
+                        console.log(`${i} and ${j} Are overlapping at X and Y`)
+                        if (!isExpolded) {
+                            isExpolded = true;
+                            const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                            const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
 
-                } else if (meteorPosition[i].bottomPosition >= meteorPosition[j].topPosition &&
-                    meteorPosition[i].bottomPosition <= meteorPosition[j].bottomPosition) {
-                    // Add Explostion and Remove divs
-                    console.log(`${i} and ${j} Are overlapping at X and Y`)
+                            const newExplostion = document.createElement('img')
+                            newExplostion.classList.add('explostion')
+                            newExplostion.src = "images/explosion-transparent-png-picture-1.png";
+                            newExplostion.style.top = `${explosionPositionTop}px`
+                            newExplostion.style.left = `${explosionPositionLeft}px`
+                            wrapper.appendChild(newExplostion);
+                            setTimeout(() => {
+                                newExplostion.remove()
+                                isExpolded = false;
+                            }, 100)
+                            meteors[i].classList.add("hidden")
+                            meteors[j].classList.add("hidden")
+                        }
 
-                    if (!isExpolded) {
-                        isExpolded = true;
-                        const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
-                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
+                    } else if (meteorPosition[i].topPosition >= meteorPosition[j].topPosition &&
+                        meteorPosition[i].topPosition <= meteorPosition[j].bottomPosition) {
+                        // Add Explostion and Remove divs
+                        console.log(`${i} and ${j} Are overlapping at X and Y`)
 
-                        const newExplostion = document.createElement('img')
-                        newExplostion.classList.add('explostion')
-                        newExplostion.src = "images/explosion-transparent-png-picture-1.png";
-                        newExplostion.style.top = `${explosionPositionTop}px`
-                        newExplostion.style.left = `${explosionPositionLeft}px`
-                        wrapper.appendChild(newExplostion);
-                        setTimeout(() => {
-                            newExplostion.remove()
-                            isExpolded = false;
-                        }, 100)
+                        if (!isExpolded) {
+                            isExpolded = true;
+                            const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
+                            const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
+
+                            const newExplostion = document.createElement('img')
+                            newExplostion.classList.add('explostion')
+                            newExplostion.src = "images/explosion-transparent-png-picture-1.png";
+                            newExplostion.style.top = `${explosionPositionTop}px`
+                            newExplostion.style.left = `${explosionPositionLeft}px`
+                            wrapper.appendChild(newExplostion);
+                            setTimeout(() => {
+                                newExplostion.remove()
+                                isExpolded = false;
+                            }, 100)
+                            meteors[i].classList.add("hidden")
+                            meteors[j].classList.add("hidden")
+                        }
                     }
+                } else {
+                    console.log('no overlap')
                 }
-            } else if (meteorPosition[i].rightPosition >= meteorPosition[j].leftPosition &&
-                meteorPosition[i].rightPosition <= meteorPosition[j].rightPosition) {
-                if (meteorPosition[i].bottomPosition >= meteorPosition[j].topPosition &&
-                    meteorPosition[i].bottomPosition <= meteorPosition[j].bottomPosition) {
-                    // Add Explostion and Remove divs
-                    console.log(`${i} and ${j} Are overlapping at X and Y`)
-                    if (!isExpolded) {
-                        isExpolded = true;
-                        const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
-                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
-
-                        const newExplostion = document.createElement('img')
-                        newExplostion.classList.add('explostion')
-                        newExplostion.src = "images/explosion-transparent-png-picture-1.png";
-                        newExplostion.style.top = `${explosionPositionTop}px`
-                        newExplostion.style.left = `${explosionPositionLeft}px`
-                        wrapper.appendChild(newExplostion);
-                        setTimeout(() => {
-                            newExplostion.remove()
-                            isExpolded = false;
-                        }, 100)
-                    }
-
-                } else if (meteorPosition[i].topPosition >= meteorPosition[j].topPosition &&
-                    meteorPosition[i].topPosition <= meteorPosition[j].bottomPosition) {
-                    // Add Explostion and Remove divs
-                    console.log(`${i} and ${j} Are overlapping at X and Y`)
-
-                    if (!isExpolded) {
-                        isExpolded = true;
-                        const explosionPositionTop = (meteorPosition[i].topPosition + meteorPosition[j].topPosition) / 2;
-                        const explosionPositionLeft = (meteorPosition[i].leftPosition + meteorPosition[j].leftPosition) / 2;
-
-                        const newExplostion = document.createElement('img')
-                        newExplostion.classList.add('explostion')
-                        newExplostion.src = "images/explosion-transparent-png-picture-1.png";
-                        newExplostion.style.top = `${explosionPositionTop}px`
-                        newExplostion.style.left = `${explosionPositionLeft}px`
-                        wrapper.appendChild(newExplostion);
-                        setTimeout(() => {
-                            newExplostion.remove()
-                            isExpolded = false;
-                        }, 100)
-                    }
-                }
-            } else {
-                console.log('no overlap')
             }
 
         }
@@ -164,7 +172,7 @@ body.addEventListener('mousemove', (ev) => {
     const middleElementY = ev.clientY
     spaceship.style.top = `${middleElementY}px`
     spaceship.style.left = `${middleElementX}px`
-}) 
+})
 
 moveMeteors();
 setTimeout(moveMeteors, 500)

@@ -1,3 +1,10 @@
+.hidden {
+  display: none;
+}
+.hidden img {
+  display: none;
+}
+
 * {
   box-sizing: border-box;
 }
