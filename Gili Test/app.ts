@@ -1,4 +1,5 @@
 const meteors: NodeList = document.querySelectorAll('.meteor')
+const spaceship = document.querySelector('#spacShip')
 
 const wrapper: HTMLDivElement = document.querySelector('.wrapper')
 
@@ -163,7 +164,6 @@ setRandomRotate();
 setInterval(moveMeteors, 5000)
 
 dragElement(document.getElementById("spaceShip"));
-
 
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;

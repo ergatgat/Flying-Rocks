@@ -1,4 +1,5 @@
 var meteors = document.querySelectorAll('.meteor');
+var spaceship = document.querySelector('#spacShip');
 var wrapper = document.querySelector('.wrapper');
 // function gets meteors and returns each meteor position
 function getMeteorPosition(meteors) {
