@@ -168,8 +168,8 @@ function setRandomRotate() {
 }
 
 body.addEventListener('mousemove', (ev) => {
-    const middleElementX = ev.clientX
-    const middleElementY = ev.clientY
+    const middleElementX = ev.clientX - (spaceship.offsetWidth)/2
+    const middleElementY = ev.clientY - (spaceship.offsetHeight)/2 + 50
     spaceship.style.top = `${middleElementY}px`
     spaceship.style.left = `${middleElementX}px`
 })

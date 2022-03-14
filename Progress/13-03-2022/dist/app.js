@@ -161,8 +161,8 @@ function setRandomRotate() {
     });
 }
 body.addEventListener('mousemove', function (ev) {
-    var middleElementX = ev.clientX;
-    var middleElementY = ev.clientY;
+    var middleElementX = ev.clientX - (spaceship.offsetWidth) / 2;
+    var middleElementY = ev.clientY - (spaceship.offsetHeight) / 2 + 50;
     spaceship.style.top = middleElementY + "px";
     spaceship.style.left = middleElementX + "px";
 });

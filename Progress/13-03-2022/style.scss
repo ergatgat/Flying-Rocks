@@ -9,6 +9,7 @@
     box-sizing: border-box;
 }
 body{
+    cursor: none;
     margin: 0;
     padding: 0;
     width: 100vw;
@@ -51,12 +52,13 @@ body{
 .explostion{
     width: 125px;
     position: absolute;
+    transition: scale 500ms ease-in-out;
 }
 
 #spaceShip{
     position: absolute;
     top: 80%;
     left: 50%;
-
+    transition: all 10ms linear;
 }
 
