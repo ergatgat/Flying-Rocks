@@ -98,12 +98,12 @@ body.addEventListener('click', function (ev) {
             allImages[i].style.animation = "none";
             allImages[i].style.width = "100px";
             allImages[i].style.height = "100px";
-            var snap = document.createElement('audio');
-            snap.src = 'sounds/Snap.mp3';
-            body.appendChild(snap);
-            snap.play();
+            var snap_1 = document.createElement('audio');
+            snap_1.src = 'sounds/Snap.mp3';
+            body.appendChild(snap_1);
+            snap_1.play();
             setTimeout(function () {
-                // snap.remove();
+                snap_1.remove();
                 allRocks[i].remove();
             }, 500);
         }

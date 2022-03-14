@@ -115,7 +115,7 @@ body.addEventListener('click', (ev) => {
                 body.appendChild(snap);
                 snap.play();
                 setTimeout(()=> {
-                    // snap.remove();
+                    snap.remove();
                     allRocks[i].remove();
                 },500)
         }
