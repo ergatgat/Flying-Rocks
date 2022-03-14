@@ -1,6 +1,8 @@
 const body: HTMLBodyElement = document.querySelector('body');
 const allRocks: NodeListOf<HTMLDivElement> = document.querySelectorAll('.rock');
 
+body.style.backgroundImage = `url(images/Background.jpg)`
+
 function startGame() {
     setRocksRandomPosition(allRocks);
 }

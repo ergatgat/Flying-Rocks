@@ -1,5 +1,6 @@
 var body = document.querySelector('body');
 var allRocks = document.querySelectorAll('.rock');
+body.style.backgroundImage = "url(images/Background.jpg)";
 function startGame() {
     setRocksRandomPosition(allRocks);
 }
