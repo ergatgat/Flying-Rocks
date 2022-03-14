@@ -1,5 +1,6 @@
 var body = document.querySelector('body');
 var allRocks = document.querySelectorAll('.rock');
+var allImages = document.querySelectorAll('img');
 var imgArray = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"];
 body.style.backgroundImage = "url(images/Background.jpg)";
 function startGame() {
@@ -86,20 +87,35 @@ function setRandomRotation(rocks) {
 // true: remove rock
 body.addEventListener('click', function (ev) {
     ev.stopPropagation();
-    for (var i = 0; i < allRocks.length; i++) {
+    var _loop_1 = function (i) {
         if (ev.clientX >= getRockPosition(allRocks)[i]['leftPosition'] && ev.clientX <= getRockPosition(allRocks)[i]['leftPosition'] + allRocks[i].offsetWidth
             && ev.clientY >= getRockPosition(allRocks)[i]['topPosition'] && ev.clientY <= getRockPosition(allRocks)[i]['topPosition'] + allRocks[i].offsetHeight) {
-            console.log(allRocks[i].childNodes[1].src);
-            allRocks[i].childNodes[1].src =
+            var whichImage = getRandomNumber(imgArray.length);
+            allImages[i].src = imgArray[whichImage];
+            allRocks[i].style.rotate = "0deg";
+            allRocks[i].style.top = ev.clientY + "px";
+            allRocks[i].style.left = ev.clientX + "px";
+            allImages[i].style.animation = "none";
+            allImages[i].style.width = "100px";
+            allImages[i].style.height = "100px";
+            var snap = document.createElement('audio');
+            snap.src = 'sounds/Snap.mp3';
+            body.appendChild(snap);
+            snap.play();
+            setTimeout(function () {
+                // snap.remove();
                 allRocks[i].remove();
+            }, 500);
         }
+    };
+    for (var i = 0; i < allRocks.length; i++) {
+        _loop_1(i);
     }
 });
+function getRandomNumber(max) {
+    return Math.floor(Math.random() * max);
+}
 startGame();
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
-function getRandomNumber(max) {
-    var random = Math.floor(Math.random() * max);
-    return random;
-}

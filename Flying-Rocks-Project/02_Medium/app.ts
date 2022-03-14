@@ -1,6 +1,7 @@
 const body: HTMLBodyElement = document.querySelector('body');
 const allRocks: NodeListOf<HTMLDivElement> = document.querySelectorAll('.rock');
-const imgArray:Array<string> = ["images/boom.png", "images/wow.png","images/pow.png","images/zap.png"] 
+const allImages:NodeListOf<HTMLImageElement> = document.querySelectorAll('img');
+const imgArray: Array<string> = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"]
 body.style.backgroundImage = `url(images/Background.jpg)`
 
 function startGame() {
@@ -86,7 +87,7 @@ function getRockPosition(rocks: NodeListOf<HTMLDivElement>): Array<object> {
 // Function
 // Gets all rocks
 // Sets each rock in random rotation between 0 to 360deg
-function setRandomRotation(rocks:NodeListOf<HTMLDivElement>){
+function setRandomRotation(rocks: NodeListOf<HTMLDivElement>) {
     rocks.forEach(element => {
         element.style.rotate = `${Math.floor(Math.random() * 360)}deg`
     })
@@ -101,12 +102,29 @@ body.addEventListener('click', (ev) => {
     for (let i = 0; i < allRocks.length; i++) {
         if (ev.clientX >= getRockPosition(allRocks)[i]['leftPosition'] && ev.clientX <= getRockPosition(allRocks)[i]['leftPosition'] + allRocks[i].offsetWidth
             && ev.clientY >= getRockPosition(allRocks)[i]['topPosition'] && ev.clientY <= getRockPosition(allRocks)[i]['topPosition'] + allRocks[i].offsetHeight) {
-            console.log(allRocks[i].childNodes[1].src)
-            allRocks[i].childNodes[1].src = 
-                allRocks[i].remove();
+                const whichImage :number = getRandomNumber(imgArray.length)
+                allImages[i].src = imgArray[whichImage];
+                allRocks[i].style.rotate = "0deg";
+                allRocks[i].style.top = `${ev.clientY}px`
+                allRocks[i].style.left = `${ev.clientX}px`
+                allImages[i].style.animation = "none";
+                allImages[i].style.width = "100px"
+                allImages[i].style.height = "100px"
+                const snap:HTMLAudioElement = document.createElement('audio');
+                snap.src = 'sounds/Snap.mp3';
+                body.appendChild(snap);
+                snap.play();
+                setTimeout(()=> {
+                    // snap.remove();
+                    allRocks[i].remove();
+                },500)
         }
     }
 })
+
+function getRandomNumber(max): number {
+    return Math.floor(Math.random() * max);
+}
 
 startGame();
 setRandomRotation(allRocks);
@@ -114,7 +132,4 @@ setTimeout(startGame, 500);
 setInterval(startGame, 5000);
 
 
-function getRandomNumber(max) {
-    const random:number = Math.floor(Math.random() * max)
-    return random
-}
+
