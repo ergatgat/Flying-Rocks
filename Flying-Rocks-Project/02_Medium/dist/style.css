@@ -15,12 +15,16 @@ body .rock {
   width: 75px;
   height: 75px;
   transition: top 5s ease-in-out, left 5s ease-in-out;
+  user-select: none;
 }
 body .rock img {
   width: 100%;
   height: 100%;
   animation-name: rotate360;
   animation: 10s rotate360 infinite linear;
+}
+body .un-clickable {
+  pointer-events: none;
 }
 
 @keyframes rotate360 {

@@ -81,40 +81,60 @@ function setRandomRotation(rocks) {
         element.style.rotate = Math.floor(Math.random() * 360) + "deg";
     });
 }
+// Function:
+// Gets number to be max
+// Returns number between 0 - max(number)//
+function getRandomNumber(max) {
+    return Math.floor(Math.random() * max);
+}
+// Function:
+// Gets index(number) -> in this case the number of element that was clicked
+// Setting:
+// 1. Random Explotion Image
+// 2. Rotation of rock to 0
+// 3. Width of Explotion to 100px width and height
+// 4. Remove Element was clicked
+function addPictureSoundAndRemove(index) {
+    // Get random number to chose which image
+    var randomImage = getRandomNumber(imgArray.length);
+    // Creating HTML Audio Element
+    var snap = document.createElement('audio');
+    // Set the rock rotatation to 0
+    allRocks[index].style.rotate = "0deg";
+    // Set the image to randomImage from the Array
+    allImages[index].src = imgArray[randomImage];
+    // Stopping Animation Rotation
+    allImages[index].style.animation = "none";
+    // Setting Image Width and Height to 100px
+    allImages[index].style.width = "100px";
+    allImages[index].style.height = "100px";
+    allRocks[index].classList.add('un-clickable');
+    allRocks[index].style.pointerEvents = "none";
+    // Setting the sound to Snap
+    snap.src = 'sounds/Snap.mp3';
+    // Playing the sound
+    snap.play();
+    // After 500ms remove rock that was clicked
+    setTimeout(function () {
+        allRocks[index].remove();
+    }, 500);
+}
 // Event Listener when click
 // Checks if: rockLeftPosition <= *MouseXPosition* <= rockLeftPosition + rockWidth
 // Checks if: rockRightPosition <= *MouseYPosition* <= rockRightPosition + rockHeight
 // true: remove rock
 body.addEventListener('click', function (ev) {
     ev.stopPropagation();
-    var _loop_1 = function (i) {
+    for (var i = 0; i < allRocks.length; i++) {
         if (ev.clientX >= getRockPosition(allRocks)[i]['leftPosition'] && ev.clientX <= getRockPosition(allRocks)[i]['leftPosition'] + allRocks[i].offsetWidth
             && ev.clientY >= getRockPosition(allRocks)[i]['topPosition'] && ev.clientY <= getRockPosition(allRocks)[i]['topPosition'] + allRocks[i].offsetHeight) {
-            var whichImage = getRandomNumber(imgArray.length);
-            allImages[i].src = imgArray[whichImage];
-            allRocks[i].style.rotate = "0deg";
+            // When rock clicked hold it position where was clicked
             allRocks[i].style.top = ev.clientY + "px";
             allRocks[i].style.left = ev.clientX + "px";
-            allImages[i].style.animation = "none";
-            allImages[i].style.width = "100px";
-            allImages[i].style.height = "100px";
-            var snap_1 = document.createElement('audio');
-            snap_1.src = 'sounds/Snap.mp3';
-            body.appendChild(snap_1);
-            snap_1.play();
-            setTimeout(function () {
-                snap_1.remove();
-                allRocks[i].remove();
-            }, 500);
+            addPictureSoundAndRemove(i);
         }
-    };
-    for (var i = 0; i < allRocks.length; i++) {
-        _loop_1(i);
     }
 });
-function getRandomNumber(max) {
-    return Math.floor(Math.random() * max);
-}
 startGame();
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
