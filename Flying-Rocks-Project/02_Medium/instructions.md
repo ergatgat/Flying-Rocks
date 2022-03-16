@@ -1,5 +1,5 @@
 /*----------------THE-GAME-------------------*/
-/*--------------LEVEL-SIMPLE-----------------*/
+/*--------------LEVEL-MEDIUM-----------------*/
 1. Rocks are flying randomly on the screen
 2. If => mouse clicked on rock => disappear rock
 3. disappear => change to explostion and remove

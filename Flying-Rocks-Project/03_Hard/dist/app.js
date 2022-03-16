@@ -4,8 +4,15 @@ var allImages = document.querySelectorAll('img');
 var imgArray = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"];
 var bombArray = []; // Array that holds each bomb
 body.style.backgroundImage = "url(images/Background.jpg)";
+// Function:
+// Moving rocks
 function startGame() {
     setRocksRandomPosition(allRocks);
+}
+// Function:
+// Runs check collision with bombs array for set interval
+function mineDetection() {
+    checkCollision(bombArray);
 }
 // Function:
 // Gets all rocks
@@ -98,24 +105,21 @@ function removeRockAndBomb(rockIndex, bombIndex) {
 }
 // Function:
 // Gets rock index number
-// Creates a new div and append it to body,
-// Gives div the X,Y of rock
-// Add image to div, and append it to it
-// Add source to the image
-// Add audio of explotion and play it
-// Remove div after 0.5 seconds
+// Creating:
+// 1. Expoltion
+// 2. Audio
 function createExplotion(rockIndex) {
-    var rockPosition = getRockPosition(allRocks)[rockIndex];
-    var explotion = document.createElement('div');
-    body.append(explotion);
-    explotion.classList.add('explode-holder');
+    var rockPosition = getRockPosition(allRocks)[rockIndex]; // Gets Spesific rockPostion
+    var explotion = document.createElement('div'); // Create explotion holder as div element
+    explotion.classList.add('explode-holder'); // Added class to explotion holder
+    body.append(explotion); // append explotion holder to body
     explotion.style.left = rockPosition['leftPosition'] + "px";
     explotion.style.top = rockPosition['topPosition'] + "px";
-    var explotionImage = document.createElement('img');
-    explotion.append(explotionImage);
-    explotionImage.classList.add('explode-image');
-    var randomIndex = getRandomNumber(imgArray.length);
-    explotionImage.src = imgArray[randomIndex];
+    var explotionImage = document.createElement('img'); // Create expoltion image as img element
+    explotionImage.classList.add('explode-image'); // Added class to explotion image
+    explotion.append(explotionImage); // append explotion image to explotion holder
+    var randomIndex = getRandomNumber(imgArray.length); // get random number of image array
+    explotionImage.src = imgArray[randomIndex]; // setting explotion image to the spesific image
     var explotionSound = document.createElement('audio');
     explotionSound.src = 'sounds/Snap.mp3';
     explotionSound.play();
@@ -147,10 +151,10 @@ function createBomb(ev) {
 }
 // Function:
 // Gets bombs array
-// Check collision between rocks array and bombs
+// Check collision between rocks and bombs
 // True:
-//      Run create explotion
-//      Run remove rock
+//  Run create explotion
+//  Run remove rock
 function checkCollision(bombs) {
     for (var i = 0; i < allRocks.length; i++) {
         for (var j = 0; j < bombArray.length; j++) {
@@ -180,16 +184,8 @@ function checkCollision(bombs) {
                     removeRockAndBomb(i, j);
                 }
             }
-            // else {
-            //     console.log('no go')
-            // }
         }
     }
-}
-// Function:
-// Runs check collision with bombs array for set interval
-function mineDetection() {
-    checkCollision(bombArray);
 }
 // Event Listener when click
 // Checks if: rockLeftPosition <= *MouseXPosition* <= rockLeftPosition + rockWidth

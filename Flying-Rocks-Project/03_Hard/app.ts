@@ -5,8 +5,16 @@ const imgArray: Array<string> = ["images/boom.png", "images/wow.png", "images/po
 const bombArray: Array<HTMLDivElement> = []; // Array that holds each bomb
 body.style.backgroundImage = `url(images/Background.jpg)`
 
+// Function:
+// Moving rocks
 function startGame() {
     setRocksRandomPosition(allRocks);
+}
+
+// Function:
+// Runs check collision with bombs array for set interval
+function mineDetection() {
+    checkCollision(bombArray)
 }
 
 // Function:
@@ -112,27 +120,28 @@ function removeRockAndBomb(rockIndex: number, bombIndex: number) {
 
 // Function:
 // Gets rock index number
-// Creates a new div and append it to body,
-// Gives div the X,Y of rock
-// Add image to div, and append it to it
-// Add source to the image
-// Add audio of explotion and play it
-// Remove div after 0.5 seconds
+// Creating:
+// 1. Expoltion
+// 2. Audio
 function createExplotion(rockIndex: number) {
-    const rockPosition:object = getRockPosition(allRocks)[rockIndex];
-    const explotion:HTMLDivElement = document.createElement('div');
-    body.append(explotion)
-    explotion.classList.add('explode-holder')
+    const rockPosition:object = getRockPosition(allRocks)[rockIndex]; // Gets Spesific rockPostion
+    const explotion:HTMLDivElement = document.createElement('div'); // Create explotion holder as div element
+    explotion.classList.add('explode-holder') // Added class to explotion holder
+    body.append(explotion) // append explotion holder to body
+
     explotion.style.left = `${rockPosition['leftPosition']}px`
     explotion.style.top = `${rockPosition['topPosition']}px`
-    const explotionImage:HTMLImageElement = document.createElement('img');
-    explotion.append(explotionImage)
-    explotionImage.classList.add('explode-image')
-    const randomIndex:number = getRandomNumber(imgArray.length)
-    explotionImage.src = imgArray[randomIndex]
+
+    const explotionImage:HTMLImageElement = document.createElement('img'); // Create expoltion image as img element
+    explotionImage.classList.add('explode-image') // Added class to explotion image
+    explotion.append(explotionImage)// append explotion image to explotion holder
+
+    const randomIndex:number = getRandomNumber(imgArray.length) // get random number of image array
+    explotionImage.src = imgArray[randomIndex] // setting explotion image to the spesific image
+
     const explotionSound:HTMLAudioElement = document.createElement('audio')
-    explotionSound.src = 'sounds/Snap.mp3'
-    explotionSound.play()
+    explotionSound.src = 'sounds/Snap.mp3' 
+    explotionSound.play() 
     setTimeout(() => {
         explotion.remove()
     }, 500);
@@ -145,7 +154,7 @@ function createExplotion(rockIndex: number) {
 // 2. bombImage => image Element
 // 3. Sets bombHolder Position to Mouse click
 // Returns: bombArray => array with all bombs (divs)//
-function createBomb(ev: MouseEvent) {
+function createBomb(ev: MouseEvent): Array<HTMLDivElement> {
     const bomb: HTMLDivElement = document.createElement('div'); // Creating div element 
     bomb.classList.add('bomb-holder'); // Adding class to div
     bombArray.push(bomb);// Appending bomb to bombArray
@@ -164,13 +173,12 @@ function createBomb(ev: MouseEvent) {
     return bombArray;
 }
 
-
 // Function:
 // Gets bombs array
-// Check collision between rocks array and bombs
+// Check collision between rocks and bombs
 // True:
-//      Run create explotion
-//      Run remove rock
+//  Run create explotion
+//  Run remove rock
 function checkCollision(bombs: Array<HTMLDivElement>) {
     for (let i = 0; i < allRocks.length; i++) {
         for (let j = 0; j < bombArray.length; j++) {
@@ -200,19 +208,9 @@ function checkCollision(bombs: Array<HTMLDivElement>) {
                     removeRockAndBomb(i, j)
                 }
             }
-            // else {
-            //     console.log('no go')
-            // }
         }
     }
 }
-
-// Function:
-// Runs check collision with bombs array for set interval
-function mineDetection() {
-    checkCollision(bombArray)
-}
-
 
 // Event Listener when click
 // Checks if: rockLeftPosition <= *MouseXPosition* <= rockLeftPosition + rockWidth
@@ -223,9 +221,8 @@ body.addEventListener('click', (ev) => {
     createBomb(ev)
 })
 
-
 startGame();
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
-setInterval(mineDetection, 100)
+setInterval(mineDetection, 100);
