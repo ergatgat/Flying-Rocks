@@ -116,19 +116,23 @@ function removeRockAndBomb(rockIndex: number, bombIndex: number) {
 // Gives div the X,Y of rock
 // Add image to div, and append it to it
 // Add source to the image
+// Add audio of explotion and play it
 // Remove div after 0.5 seconds
 function createExplotion(rockIndex: number) {
-    const rockPosition = getRockPosition(allRocks)[rockIndex];
-    const explotion = document.createElement('div');
+    const rockPosition:object = getRockPosition(allRocks)[rockIndex];
+    const explotion:HTMLDivElement = document.createElement('div');
     body.append(explotion)
     explotion.classList.add('explode-holder')
     explotion.style.left = `${rockPosition['leftPosition']}px`
     explotion.style.top = `${rockPosition['topPosition']}px`
-    const explotionImage = document.createElement('img');
+    const explotionImage:HTMLImageElement = document.createElement('img');
     explotion.append(explotionImage)
     explotionImage.classList.add('explode-image')
-    const randomIndex = getRandomNumber(imgArray.length)
+    const randomIndex:number = getRandomNumber(imgArray.length)
     explotionImage.src = imgArray[randomIndex]
+    const explotionSound:HTMLAudioElement = document.createElement('audio')
+    explotionSound.src = 'sounds/Snap.mp3'
+    explotionSound.play()
     setTimeout(() => {
         explotion.remove()
     }, 500);
@@ -159,6 +163,7 @@ function createBomb(ev: MouseEvent) {
     bomb.style.left = `${bombCenterWidth}px`; // Setting bomb in the center width
     return bombArray;
 }
+
 
 // Function:
 // Gets bombs array

@@ -102,6 +102,7 @@ function removeRockAndBomb(rockIndex, bombIndex) {
 // Gives div the X,Y of rock
 // Add image to div, and append it to it
 // Add source to the image
+// Add audio of explotion and play it
 // Remove div after 0.5 seconds
 function createExplotion(rockIndex) {
     var rockPosition = getRockPosition(allRocks)[rockIndex];
@@ -115,6 +116,9 @@ function createExplotion(rockIndex) {
     explotionImage.classList.add('explode-image');
     var randomIndex = getRandomNumber(imgArray.length);
     explotionImage.src = imgArray[randomIndex];
+    var explotionSound = document.createElement('audio');
+    explotionSound.src = 'sounds/Snap.mp3';
+    explotionSound.play();
     setTimeout(function () {
         explotion.remove();
     }, 500);
