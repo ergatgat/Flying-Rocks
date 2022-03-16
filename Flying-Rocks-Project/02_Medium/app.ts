@@ -2,6 +2,8 @@ const body: HTMLBodyElement = document.querySelector('body');
 const allRocks: NodeListOf<HTMLDivElement> = document.querySelectorAll('.rock');
 const allImages:NodeListOf<HTMLImageElement> = document.querySelectorAll('img');
 const imgArray: Array<string> = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"]
+let clicked:boolean = false;
+
 body.style.backgroundImage = `url(images/Background.jpg)`
 
 function startGame() {
@@ -108,30 +110,21 @@ function getRandomNumber(max:number): number {
 // 3. Width of Explotion to 100px width and height
 // 4. Remove Element was clicked
 function addPictureSoundAndRemove(index:number){
-    // Get random number to chose which image
-    const randomImage :number = getRandomNumber(imgArray.length);
-    // Creating HTML Audio Element
-    const snap:HTMLAudioElement = document.createElement('audio');
-    // Set the rock rotatation to 0
-    allRocks[index].style.rotate = "0deg";
-    // Set the image to randomImage from the Array
-    allImages[index].src = imgArray[randomImage];
-    // Stopping Animation Rotation
-    allImages[index].style.animation = "none";
-    // Setting Image Width and Height to 100px
-    allImages[index].style.width = "100px";
-    allImages[index].style.height = "100px";
+    clicked = true;
+    const randomImage :number = getRandomNumber(imgArray.length); // Get random number to chose which image
+    const snap:HTMLAudioElement = document.createElement('audio'); // Creating HTML Audio Element
+    allRocks[index].style.rotate = "0deg";     // Set the rock rotatation to 0
+    allImages[index].src = imgArray[randomImage];     // Set the image to randomImage from the Array
+    allImages[index].style.animation = "none";     // Stopping Animation Rotation
+    allImages[index].style.width = "100px";     // Setting Image Width to 100px
+    allImages[index].style.height = "100px";    // Setting Image Height to 100px
 
-    allRocks[index].classList.add('un-clickable');
-    allRocks[index].style.pointerEvents = "none"
+    snap.src = 'sounds/Snap.mp3';     // Setting the sound to Snap
+    snap.play();     // Playing the sound
 
-    // Setting the sound to Snap
-    snap.src = 'sounds/Snap.mp3';
-    // Playing the sound
-    snap.play();
-    // After 500ms remove rock that was clicked
-    setTimeout(()=> {
-        allRocks[index].remove();
+    setTimeout(()=> {     
+        allRocks[index].remove();   // After 500ms remove rock that was clicked
+        clicked = false;
     },500);
 }
 
@@ -141,13 +134,14 @@ function addPictureSoundAndRemove(index:number){
 // true: remove rock
 body.addEventListener('click', (ev) => {
     ev.stopPropagation();
-    for (let i = 0; i < allRocks.length; i++) {
-        if (ev.clientX >= getRockPosition(allRocks)[i]['leftPosition'] && ev.clientX <= getRockPosition(allRocks)[i]['leftPosition'] + allRocks[i].offsetWidth
-            && ev.clientY >= getRockPosition(allRocks)[i]['topPosition'] && ev.clientY <= getRockPosition(allRocks)[i]['topPosition'] + allRocks[i].offsetHeight) {
-                // When rock clicked hold it position where was clicked
-                allRocks[i].style.top = `${ev.clientY}px`
-                allRocks[i].style.left = `${ev.clientX}px`
-                addPictureSoundAndRemove(i);
+    if(clicked === false){
+        for (let i = 0; i < allRocks.length; i++) {
+            if (ev.clientX >= getRockPosition(allRocks)[i]['leftPosition'] && ev.clientX <= getRockPosition(allRocks)[i]['leftPosition'] + allRocks[i].offsetWidth
+                && ev.clientY >= getRockPosition(allRocks)[i]['topPosition'] && ev.clientY <= getRockPosition(allRocks)[i]['topPosition'] + allRocks[i].offsetHeight) {
+                    allRocks[i].style.top = `${ev.clientY}px` // When rock clicked hold it position where was clicked PositionY
+                    allRocks[i].style.left = `${ev.clientX}px` // When rock clicked hold it position where was clicked PositionX
+                    addPictureSoundAndRemove(i);
+            }
         }
     }
 })
