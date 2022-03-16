@@ -79,7 +79,8 @@ function getRockPosition(rocks) {
 // Sets each rock in random rotation between 0 to 360deg
 function setRandomRotation(rocks) {
     rocks.forEach(function (element) {
-        element.style.rotate = Math.floor(Math.random() * 360) + "deg";
+        // element.style.rotate = `${Math.floor(Math.random() * 360)}deg`
+        element.style.transform = "rotate(" + Math.floor(Math.random() * 360) + "deg)";
     });
 }
 // Function:
@@ -95,6 +96,13 @@ function removeRockAndBomb(rockIndex, bombIndex) {
     allRocks[rockIndex].remove();
     bombArray[bombIndex].remove();
 }
+// Function:
+// Gets rock index number
+// Creates a new div and append it to body,
+// Gives div the X,Y of rock
+// Add image to div, and append it to it
+// Add source to the image
+// Remove div after 0.5 seconds
 function createExplotion(rockIndex) {
     var rockPosition = getRockPosition(allRocks)[rockIndex];
     var explotion = document.createElement('div');
@@ -133,6 +141,12 @@ function createBomb(ev) {
     bomb.style.left = bombCenterWidth + "px"; // Setting bomb in the center width
     return bombArray;
 }
+// Function:
+// Gets bombs array
+// Check collision between rocks array and bombs
+// True:
+//      Run create explotion
+//      Run remove rock
 function checkCollision(bombs) {
     for (var i = 0; i < allRocks.length; i++) {
         for (var j = 0; j < bombArray.length; j++) {
@@ -168,6 +182,8 @@ function checkCollision(bombs) {
         }
     }
 }
+// Function:
+// Runs check collision with bombs array for set interval
 function mineDetection() {
     checkCollision(bombArray);
 }

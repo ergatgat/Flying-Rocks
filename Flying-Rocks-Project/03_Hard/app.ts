@@ -57,7 +57,7 @@ function getRandomPosition(rocks: NodeListOf<HTMLDivElement>): Array<number> {
 function getRockDimenstion(rocks: NodeListOf<HTMLDivElement>): Array<object> {
     const rockArray: Array<object> = [];
     rocks.forEach(element => {
-        const rock = { // was let!!!!!!!!!!!!
+        const rock = {
             'rockWidth': element.offsetWidth,
             'rockHeight': element.offsetHeight,
         }
@@ -90,7 +90,8 @@ function getRockPosition(rocks: NodeListOf<HTMLDivElement>): Array<object> {
 // Sets each rock in random rotation between 0 to 360deg
 function setRandomRotation(rocks: NodeListOf<HTMLDivElement>) {
     rocks.forEach(element => {
-        element.style.rotate = `${Math.floor(Math.random() * 360)}deg`
+        // element.style.rotate = `${Math.floor(Math.random() * 360)}deg`
+        element.style.transform = `rotate(${Math.floor(Math.random() * 360)}deg)`
     })
 }
 
@@ -109,6 +110,13 @@ function removeRockAndBomb(rockIndex: number, bombIndex: number) {
     bombArray[bombIndex].remove()
 }
 
+// Function:
+// Gets rock index number
+// Creates a new div and append it to body,
+// Gives div the X,Y of rock
+// Add image to div, and append it to it
+// Add source to the image
+// Remove div after 0.5 seconds
 function createExplotion(rockIndex: number) {
     const rockPosition = getRockPosition(allRocks)[rockIndex];
     const explotion = document.createElement('div');
@@ -152,6 +160,12 @@ function createBomb(ev: MouseEvent) {
     return bombArray;
 }
 
+// Function:
+// Gets bombs array
+// Check collision between rocks array and bombs
+// True:
+//      Run create explotion
+//      Run remove rock
 function checkCollision(bombs: Array<HTMLDivElement>) {
     for (let i = 0; i < allRocks.length; i++) {
         for (let j = 0; j < bombArray.length; j++) {
@@ -188,6 +202,8 @@ function checkCollision(bombs: Array<HTMLDivElement>) {
     }
 }
 
+// Function:
+// Runs check collision with bombs array for set interval
 function mineDetection() {
     checkCollision(bombArray)
 }
