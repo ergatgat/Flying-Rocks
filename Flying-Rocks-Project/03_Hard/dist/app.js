@@ -2,6 +2,7 @@ var body = document.querySelector('body');
 var allRocks = document.querySelectorAll('.rock');
 var allImages = document.querySelectorAll('img');
 var imgArray = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"];
+var bombArray = []; // Array that holds each bomb
 body.style.backgroundImage = "url(images/Background.jpg)";
 function startGame() {
     setRocksRandomPosition(allRocks);
@@ -106,19 +107,28 @@ function addPictureSoundAndRemove(index) {
     snap.play(); // Playing the sound
     setTimeout(function () {
         allRocks[index].remove(); // After 500ms remove rock that was clicked
-        clicked = false;
     }, 500);
 }
-var mouseClick = 0;
-var bombArray = [];
+// Function
+// Gets mouse event
+// Creates:
+// 1. bombHolder => div Element
+// 2. bombImage => image Element
+// 3. Sets bombHolder Position to Mouse click
+// Returns: bombArray => array with all bombs (divs)
 function createBomb(ev) {
-    console.log(ev);
-    var bomb = document.createElement('div');
-    bomb.classList.add('bomb');
-    bombArray.push(bomb);
-    bomb.style.top = ev.clientY + "px";
-    bomb.style.left = ev.clientX + "px";
-    body.appendChild(bomb);
+    var bomb = document.createElement('div'); // Creating div element 
+    bomb.classList.add('bomb-holder'); // Adding class to div
+    bombArray.push(bomb); // Appending bomb to bombArray
+    body.appendChild(bomb); // Appending bomb to body
+    var bombImage = document.createElement('img'); // Creating img element
+    bombImage.classList.add('bomb-image'); // Adding class to img
+    bombImage.src = "images/Mine.png"; // Setting image src to mine
+    bomb.appendChild(bombImage); // Appending bombImage to bombHodler
+    var bombCenterHeight = ev.clientY - (bomb.offsetHeight) / 2; // calc center height
+    var bombCenterWidth = ev.clientX - (bomb.offsetWidth) / 2; // clac center width
+    bomb.style.top = bombCenterHeight + "px"; // Setting bomb in the center height
+    bomb.style.left = bombCenterWidth + "px"; // Setting bomb in the center width
     return bombArray;
 }
 function checkCollision(bombs, rocks) {

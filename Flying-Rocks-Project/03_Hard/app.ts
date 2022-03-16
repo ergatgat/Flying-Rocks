@@ -1,7 +1,8 @@
 const body: HTMLBodyElement = document.querySelector('body');
 const allRocks: NodeListOf<HTMLDivElement> = document.querySelectorAll('.rock');
 const allImages: NodeListOf<HTMLImageElement> = document.querySelectorAll('img');
-const imgArray: Array<string> = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"]
+const imgArray: Array<string> = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"];
+const bombArray: Array<HTMLDivElement> = []; // Array that holds each bomb
 body.style.backgroundImage = `url(images/Background.jpg)`
 
 function startGame() {
@@ -110,34 +111,44 @@ function getRandomNumber(max: number): number {
 function addPictureSoundAndRemove(index: number) {
     const randomImage :number = getRandomNumber(imgArray.length); // Get random number to chose which image
     const snap:HTMLAudioElement = document.createElement('audio'); // Creating HTML Audio Element
-    allRocks[index].style.rotate = "0deg";     // Set the rock rotatation to 0
-    allImages[index].src = imgArray[randomImage];     // Set the image to randomImage from the Array
-    allImages[index].style.animation = "none";     // Stopping Animation Rotation
-    allImages[index].style.width = "100px";     // Setting Image Width to 100px
-    allImages[index].style.height = "100px";    // Setting Image Height to 100px
+    allRocks[index].style.rotate = "0deg"; // Set the rock rotatation to 0
+    allImages[index].src = imgArray[randomImage]; // Set the image to randomImage from the Array
+    allImages[index].style.animation = "none"; // Stopping Animation Rotation
+    allImages[index].style.width = "100px"; // Setting Image Width to 100px
+    allImages[index].style.height = "100px"; // Setting Image Height to 100px
 
-    snap.src = 'sounds/Snap.mp3';     // Setting the sound to Snap
-    snap.play();     // Playing the sound
+    snap.src = 'sounds/Snap.mp3'; // Setting the sound to Snap
+    snap.play(); // Playing the sound
 
     setTimeout(()=> {     
         allRocks[index].remove();   // After 500ms remove rock that was clicked
-        clicked = false;
     },500);
 }
 
-var mouseClick = 0;
-const bombArray: Array<HTMLDivElement> = [];
-
-
+// Function
+// Gets mouse event
+// Creates:
+// 1. bombHolder => div Element
+// 2. bombImage => image Element
+// 3. Sets bombHolder Position to Mouse click
+// Returns: bombArray => array with all bombs (divs)
 function createBomb(ev: MouseEvent) {
-    console.log(ev)
-    let bomb: HTMLDivElement = document.createElement('div')
-    bomb.classList.add('bomb')
-    bombArray.push(bomb)
-    bomb.style.top = `${ev.clientY}px`
-    bomb.style.left = `${ev.clientX}px`
-    body.appendChild(bomb)
-    return bombArray
+    const bomb: HTMLDivElement = document.createElement('div'); // Creating div element 
+    bomb.classList.add('bomb-holder'); // Adding class to div
+    bombArray.push(bomb);// Appending bomb to bombArray
+    body.appendChild(bomb); // Appending bomb to body
+
+    const bombImage = document.createElement('img'); // Creating img element
+    bombImage.classList.add('bomb-image'); // Adding class to img
+    bombImage.src = "images/Mine.png"; // Setting image src to mine
+    bomb.appendChild(bombImage); // Appending bombImage to bombHodler
+
+    const bombCenterHeight = ev.clientY - (bomb.offsetHeight)/2; // calc center height
+    const bombCenterWidth = ev.clientX - (bomb.offsetWidth)/2; // clac center width
+
+    bomb.style.top = `${bombCenterHeight}px`; // Setting bomb in the center height
+    bomb.style.left = `${bombCenterWidth}px`; // Setting bomb in the center width
+    return bombArray;
 }
 
 function checkCollision(bombs: Array<HTMLDivElement>, rocks: NodeListOf<HTMLDivElement>) {
