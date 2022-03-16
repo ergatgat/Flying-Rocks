@@ -1,5 +1,5 @@
 /*----------------THE-GAME-------------------*/
-/*--------------LEVEL-MEDIUM-----------------*/
+/*---------------LEVEL-HARD------------------*/
 1. Rocks are flying randomly on the screen
 2. Creates bomb in mouse click coordinates
 3. Expload rock on collision with mine
