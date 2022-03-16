@@ -24,9 +24,6 @@ body{
             animation: 10s rotate360 infinite linear;
         }
     }
-    .un-clickable{
-        pointer-events: none;
-    }
 }
 
 @keyframes rotate360 {

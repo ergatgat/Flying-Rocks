@@ -23,9 +23,6 @@ body .rock img {
   animation-name: rotate360;
   animation: 10s rotate360 infinite linear;
 }
-body .un-clickable {
-  pointer-events: none;
-}
 
 @keyframes rotate360 {
   to {

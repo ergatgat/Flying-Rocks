@@ -108,31 +108,21 @@ function getRandomNumber(max: number): number {
 // 3. Width of Explotion to 100px width and height
 // 4. Remove Element was clicked
 function addPictureSoundAndRemove(index: number) {
-    // Get random number to chose which image
-    const randomImage: number = getRandomNumber(imgArray.length);
-    // Creating HTML Audio Element
-    const snap: HTMLAudioElement = document.createElement('audio');
-    // Set the rock rotatation to 0
-    allRocks[index].style.rotate = "0deg";
-    // Set the image to randomImage from the Array
-    allImages[index].src = imgArray[randomImage];
-    // Stopping Animation Rotation
-    allImages[index].style.animation = "none";
-    // Setting Image Width and Height to 100px
-    allImages[index].style.width = "100px";
-    allImages[index].style.height = "100px";
+    const randomImage :number = getRandomNumber(imgArray.length); // Get random number to chose which image
+    const snap:HTMLAudioElement = document.createElement('audio'); // Creating HTML Audio Element
+    allRocks[index].style.rotate = "0deg";     // Set the rock rotatation to 0
+    allImages[index].src = imgArray[randomImage];     // Set the image to randomImage from the Array
+    allImages[index].style.animation = "none";     // Stopping Animation Rotation
+    allImages[index].style.width = "100px";     // Setting Image Width to 100px
+    allImages[index].style.height = "100px";    // Setting Image Height to 100px
 
-    allRocks[index].classList.add('un-clickable');
-    allRocks[index].style.pointerEvents = "none"
+    snap.src = 'sounds/Snap.mp3';     // Setting the sound to Snap
+    snap.play();     // Playing the sound
 
-    // Setting the sound to Snap
-    snap.src = 'sounds/Snap.mp3';
-    // Playing the sound
-    snap.play();
-    // After 500ms remove rock that was clicked
-    setTimeout(() => {
-        allRocks[index].remove();
-    }, 500);
+    setTimeout(()=> {     
+        allRocks[index].remove();   // After 500ms remove rock that was clicked
+        clicked = false;
+    },500);
 }
 
 var mouseClick = 0;
