@@ -33,6 +33,15 @@ body{
             height: 100%;
         }
     }
+    .explode-holder{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        .explode-image{
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
 
 

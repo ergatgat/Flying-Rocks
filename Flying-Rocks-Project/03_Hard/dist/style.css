@@ -32,6 +32,15 @@ body .bomb-holder .bomb-image {
   width: 100%;
   height: 100%;
 }
+body .explode-holder {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+body .explode-holder .explode-image {
+  width: 100%;
+  height: 100%;
+}
 
 @keyframes rotate360 {
   to {

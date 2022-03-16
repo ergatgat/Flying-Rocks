@@ -89,24 +89,26 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * max);
 }
 // Function:
-// Gets index(number) -> in this case the number of element that was clicked
-// Setting:
-// 1. Random Explotion Image
-// 2. Rotation of rock to 0
-// 3. Width of Explotion to 100px width and height
-// 4. Remove Element was clicked
-function addPictureSoundAndRemove(index) {
-    var randomImage = getRandomNumber(imgArray.length); // Get random number to chose which image
-    var snap = document.createElement('audio'); // Creating HTML Audio Element
-    allRocks[index].style.rotate = "0deg"; // Set the rock rotatation to 0
-    allImages[index].src = imgArray[randomImage]; // Set the image to randomImage from the Array
-    allImages[index].style.animation = "none"; // Stopping Animation Rotation
-    allImages[index].style.width = "100px"; // Setting Image Width to 100px
-    allImages[index].style.height = "100px"; // Setting Image Height to 100px
-    snap.src = 'sounds/Snap.mp3'; // Setting the sound to Snap
-    snap.play(); // Playing the sound
+// Gets rocks index number and bomb index
+// removes rock and bomb at indexes given
+function removeRockAndBomb(rockIndex, bombIndex) {
+    allRocks[rockIndex].remove();
+    bombArray[bombIndex].remove();
+}
+function createExplotion(rockIndex) {
+    var rockPosition = getRockPosition(allRocks)[rockIndex];
+    var explotion = document.createElement('div');
+    body.append(explotion);
+    explotion.classList.add('explode-holder');
+    explotion.style.left = rockPosition['leftPosition'] + "px";
+    explotion.style.top = rockPosition['topPosition'] + "px";
+    var explotionImage = document.createElement('img');
+    explotion.append(explotionImage);
+    explotionImage.classList.add('explode-image');
+    var randomIndex = getRandomNumber(imgArray.length);
+    explotionImage.src = imgArray[randomIndex];
     setTimeout(function () {
-        allRocks[index].remove(); // After 500ms remove rock that was clicked
+        explotion.remove();
     }, 500);
 }
 // Function
@@ -131,21 +133,43 @@ function createBomb(ev) {
     bomb.style.left = bombCenterWidth + "px"; // Setting bomb in the center width
     return bombArray;
 }
-function checkCollision(bombs, rocks) {
+function checkCollision(bombs) {
     for (var i = 0; i < allRocks.length; i++) {
         for (var j = 0; j < bombArray.length; j++) {
-            if (rocks[i]['leftPosition'] >= bombs[j].style.left &&
-                rocks[i]['leftPosition'] <= bombs[j].style.left + bombs[j].offsetWidth) { // X to the right, check to Y option
-                if (rocks[i]['topPosition'] >= bombs[j].style.top &&
-                    rocks[i]['topPosition'] <= bombs[j].style.top + bombs[j].offsetHeight) {
-                    console.log("Boom!");
+            if (getRockPosition(allRocks)[i]['leftPosition'] >= parseInt(bombs[j].style.left) &&
+                getRockPosition(allRocks)[i]['leftPosition'] <= parseInt(bombs[j].style.left) + bombs[j].offsetWidth) { // X to the right, check to Y option
+                if (getRockPosition(allRocks)[i]['topPosition'] >= parseInt(bombs[j].style.top) &&
+                    getRockPosition(allRocks)[i]['topPosition'] <= parseInt(bombs[j].style.top) + bombs[j].offsetHeight) {
+                    createExplotion(i);
+                    removeRockAndBomb(i, j);
                 }
-                else if (rocks[i]['topPosition'] + rocks[i].offsetWidth >= bombs[j].style.top &&
-                    rocks[i]['topPositio'])
-                    ;
+                else if (getRockPosition(allRocks)[i]['bottomPosition'] >= parseInt(bombs[j].style.top) &&
+                    getRockPosition(allRocks)[i]['bottomPosition'] <= parseInt(bombs[j].style.top) + bombs[j].offsetHeight) {
+                    createExplotion(i);
+                    removeRockAndBomb(i, j);
+                }
             }
+            else if (getRockPosition(allRocks)[i]['rightPosition'] >= parseInt(bombs[j].style.left) &&
+                getRockPosition(allRocks)[i]['rightPosition'] <= parseInt(bombs[j].style.left) + bombs[j].offsetWidth) {
+                if (getRockPosition(allRocks)[i]['topPosition'] >= parseInt(bombs[j].style.top) &&
+                    getRockPosition(allRocks)[i]['topPosition'] <= parseInt(bombs[j].style.top) + bombs[j].offsetHeight) {
+                    createExplotion(i);
+                    removeRockAndBomb(i, j);
+                }
+                else if (getRockPosition(allRocks)[i]['bottomPosition'] >= parseInt(bombs[j].style.top) &&
+                    getRockPosition(allRocks)[i]['bottomPosition'] <= parseInt(bombs[j].style.top) + bombs[j].offsetHeight) {
+                    createExplotion(i);
+                    removeRockAndBomb(i, j);
+                }
+            }
+            // else {
+            //     console.log('no go')
+            // }
         }
     }
+}
+function mineDetection() {
+    checkCollision(bombArray);
 }
 // Event Listener when click
 // Checks if: rockLeftPosition <= *MouseXPosition* <= rockLeftPosition + rockWidth
@@ -159,3 +183,4 @@ startGame();
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
+setInterval(mineDetection, 100);
