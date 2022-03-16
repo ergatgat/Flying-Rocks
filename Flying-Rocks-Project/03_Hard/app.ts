@@ -131,7 +131,7 @@ function addPictureSoundAndRemove(index: number) {
 // 1. bombHolder => div Element
 // 2. bombImage => image Element
 // 3. Sets bombHolder Position to Mouse click
-// Returns: bombArray => array with all bombs (divs)
+// Returns: bombArray => array with all bombs (divs)//
 function createBomb(ev: MouseEvent) {
     const bomb: HTMLDivElement = document.createElement('div'); // Creating div element 
     bomb.classList.add('bomb-holder'); // Adding class to div
