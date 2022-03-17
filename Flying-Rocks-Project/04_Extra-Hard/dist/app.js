@@ -168,7 +168,7 @@ function createBomb(ev) {
         messegeBombLimit.innerHTML = "Bombs at limit!";
         setTimeout(function () {
             messegeBombLimit.innerHTML = "";
-        }, 500);
+        }, 1000);
     }
 }
 // Function:
@@ -230,10 +230,10 @@ document.body.style.cursor = "url(images/sniper.png), auto";
 // Gets an array of rocks
 // for each rock:
 // runs random number
-// Changes width and height of rock in the array to random number
+// Changes width and height of rock in the array to random number //
 function setRandomRockSize(rocks) {
     for (var i = 0; i < rocks.length; i++) {
-        var randomSize = getRandomNumber(100);
+        var randomSize = getRandomNumber(30);
         allRocks[i].style.width = randomSize + 50 + "px";
         allRocks[i].style.height = randomSize + 50 + "px";
     }
@@ -262,5 +262,5 @@ setRandomRockSize(allRocks);
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
-setInterval(mineDetection, 100);
+setInterval(mineDetection, 10);
 setInterval(setTime, 1000);

@@ -10,11 +10,12 @@ body{
     width: 100vw;
     height: 100vh;
     background-image: url(images/Background.jpg);
-    
+    font-family: 'Montserrat', sans-serif;
     .rock{
         position: absolute;
         width: 75px;
         height: 75px;
+        // border: 2px solid red;
         transition: 
             top 5s ease-in-out,
             left 5s ease-in-out;
@@ -27,9 +28,10 @@ body{
         }
     }
     .bomb-holder{
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
         position: absolute;
+        // border: 2px solid green;
         .bomb-image{
             width: 100%;
             height: 100%;
@@ -61,7 +63,7 @@ body{
 
     .timer {
         height: 80px;
-        width: 160px;
+        width: 180px;
         position: absolute;
         bottom: 50px;
         left: 50px;
@@ -74,6 +76,7 @@ body{
     }
 
     .messege_bomb_limit {
+        text-transform: uppercase;
         width: 500px;
         height: 100px;
         margin: auto;

@@ -4,11 +4,11 @@ const allImages: NodeListOf<HTMLImageElement> = document.querySelectorAll('img')
 const imgArray: Array<string> = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"];
 const bombArray: Array<HTMLDivElement> = []; // Array that holds each bomb
 body.style.backgroundImage = `url(images/Background.jpg)`
-var bombsUsed = 0; // Bombs used counter
+let bombsUsed = 0; // Bombs used counter
 const counterHolder: HTMLDivElement = document.querySelector('.counter')
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-var totalSeconds = 0;
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
 const messegeBombLimit:HTMLDivElement = document.querySelector('.messege_bomb_limit')
 
 // Function:
@@ -192,7 +192,7 @@ function createBomb(ev: MouseEvent): Array<HTMLDivElement> {
 
         setTimeout(() => {
             messegeBombLimit.innerHTML = ""
-        }, 500);
+        }, 1000);
     }
 }
 
@@ -258,10 +258,10 @@ document.body.style.cursor = "url(images/sniper.png), auto";
 // Gets an array of rocks
 // for each rock:
 // runs random number
-// Changes width and height of rock in the array to random number
+// Changes width and height of rock in the array to random number //
 function setRandomRockSize(rocks: NodeListOf<HTMLDivElement>) {
     for (let i = 0; i < rocks.length; i++) {
-        const randomSize:number = getRandomNumber(100)
+        const randomSize:number = getRandomNumber(30)
         allRocks[i].style.width = `${randomSize+50}px`
         allRocks[i].style.height = `${randomSize+50}px`
     }
@@ -278,7 +278,7 @@ function setTime() {
     minutesLabel.innerHTML = addingZero(minuteVal);
 }
 function addingZero(sec) {
-    var secString = sec + "";
+    let secString = sec + "";
     if (secString.length < 2) {
         return "0" + secString;
     } else {
@@ -291,5 +291,5 @@ setRandomRockSize(allRocks)
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
-setInterval(mineDetection, 100);
+setInterval(mineDetection, 10);
 setInterval(setTime, 1000);
