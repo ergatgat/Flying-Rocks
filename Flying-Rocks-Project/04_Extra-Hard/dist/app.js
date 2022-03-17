@@ -257,7 +257,7 @@ function addingZero(sec) {
         return secString;
     }
 }
-console.log("hi!");
+console.log('test');
 startGame();
 setRandomRockSize(allRocks);
 setRandomRotation(allRocks);

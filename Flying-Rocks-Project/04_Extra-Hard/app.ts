@@ -286,7 +286,7 @@ function addingZero(sec) {
     }
 }
 
-console.log(`hi!`)
+console.log('test')
 
 startGame();
 setRandomRockSize(allRocks)
