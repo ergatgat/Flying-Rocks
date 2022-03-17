@@ -4,6 +4,12 @@ var allImages = document.querySelectorAll('img');
 var imgArray = ["images/boom.png", "images/wow.png", "images/pow.png", "images/zap.png"];
 var bombArray = []; // Array that holds each bomb
 body.style.backgroundImage = "url(images/Background.jpg)";
+var bombsUsed = 0; // Bombs used counter
+var counterHolder = document.querySelector('.counter');
+var minutesLabel = document.getElementById("minutes");
+var secondsLabel = document.getElementById("seconds");
+var totalSeconds = 0;
+var messegeBombLimit = document.querySelector('.messege_bomb_limit');
 // Function:
 // Moving rocks
 function startGame() {
@@ -99,9 +105,13 @@ function getRandomNumber(max) {
 // Function:
 // Gets rocks index number and bomb index
 // removes rock and bomb at indexes given
+// spliced the bomb array to make room for more bombs
 function removeRockAndBomb(rockIndex, bombIndex) {
     allRocks[rockIndex].remove();
     bombArray[bombIndex].remove();
+    bombArray.splice(bombIndex, 1);
+    // allRocks.splice(rockIndex, 1)
+    return bombArray;
 }
 // Function:
 // Gets rock index number
@@ -129,25 +139,37 @@ function createExplotion(rockIndex) {
 }
 // Function
 // Gets mouse event
+// Checks if
 // Creates:
 // 1. bombHolder => div Element
 // 2. bombImage => image Element
 // 3. Sets bombHolder Position to Mouse click
-// Returns: bombArray => array with all bombs (divs)//
+// Returns: bombArray => array with all bombs (divs)
+// 
 function createBomb(ev) {
-    var bomb = document.createElement('div'); // Creating div element 
-    bomb.classList.add('bomb-holder'); // Adding class to div
-    bombArray.push(bomb); // Appending bomb to bombArray
-    body.appendChild(bomb); // Appending bomb to body
-    var bombImage = document.createElement('img'); // Creating img element
-    bombImage.classList.add('bomb-image'); // Adding class to img
-    bombImage.src = "images/Mine.png"; // Setting image src to mine
-    bomb.appendChild(bombImage); // Appending bombImage to bombHodler
-    var bombCenterHeight = ev.clientY - (bomb.offsetHeight) / 2; // calc center height
-    var bombCenterWidth = ev.clientX - (bomb.offsetWidth) / 2; // clac center width
-    bomb.style.top = bombCenterHeight + "px"; // Setting bomb in the center height
-    bomb.style.left = bombCenterWidth + "px"; // Setting bomb in the center width
-    return bombArray;
+    if (bombArray.length < 5) {
+        bombsUsed += 1;
+        counterHolder.innerText = "" + bombsUsed;
+        var bomb = document.createElement('div'); // Creating div element 
+        bomb.classList.add('bomb-holder'); // Adding class to div
+        bombArray.push(bomb); // Appending bomb to bombArray
+        body.appendChild(bomb); // Appending bomb to body
+        var bombImage = document.createElement('img'); // Creating img element
+        bombImage.classList.add('bomb-image'); // Adding class to img
+        bombImage.src = "images/Mine.png"; // Setting image src to mine
+        bomb.appendChild(bombImage); // Appending bombImage to bombHodler
+        var bombCenterHeight = ev.clientY - (bomb.offsetHeight) / 2; // calc center height
+        var bombCenterWidth = ev.clientX - (bomb.offsetWidth) / 2; // clac center width
+        bomb.style.top = bombCenterHeight + "px"; // Setting bomb in the center height
+        bomb.style.left = bombCenterWidth + "px"; // Setting bomb in the center width
+        return bombArray;
+    }
+    else {
+        messegeBombLimit.innerHTML = "Bombs at limit!";
+        setTimeout(function () {
+            messegeBombLimit.innerHTML = "";
+        }, 500);
+    }
 }
 // Function:
 // Gets bombs array
@@ -210,10 +232,29 @@ document.body.style.cursor = "url(images/sniper.png), auto";
 // runs random number
 // Changes width and height of rock in the array to random number
 function setRandomRockSize(rocks) {
-    for (var i = 0; i < allRocks.length; i++) {
-        var randomSize = getRandomNumber(150);
-        allRocks[i].style.width = randomSize + "px";
-        allRocks[i].style.height = randomSize + "px";
+    for (var i = 0; i < rocks.length; i++) {
+        var randomSize = getRandomNumber(100);
+        allRocks[i].style.width = randomSize + 50 + "px";
+        allRocks[i].style.height = randomSize + 50 + "px";
+    }
+}
+// Function:
+// adds 1 to total sceonds var each second
+// changes html counter text to the second that passed
+// runs adding zero on each vaule to see if zero is needded at timer
+function setTime() {
+    ++totalSeconds;
+    secondsLabel.innerHTML = addingZero(totalSeconds % 60);
+    var minuteVal = Math.floor(totalSeconds / 60);
+    minutesLabel.innerHTML = addingZero(minuteVal);
+}
+function addingZero(sec) {
+    var secString = sec + "";
+    if (secString.length < 2) {
+        return "0" + secString;
+    }
+    else {
+        return secString;
     }
 }
 startGame();
@@ -222,3 +263,4 @@ setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
 setInterval(mineDetection, 100);
+setInterval(setTime, 1000);

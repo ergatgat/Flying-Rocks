@@ -44,6 +44,48 @@ body{
             height: 100%;
         }
     }
+
+    .counter {
+        height: 80px;
+        width: 80px;
+        position: absolute;
+        bottom: 50px;
+        right: 50px;
+        color: rgb(255, 255, 255);
+        font-size: 60px;
+        font-weight: bolder;
+        text-align: center;
+        background-color: rgba($color: #ffffff, $alpha: 0.5);
+        border: 1px solid white;
+    }
+
+    .timer {
+        height: 80px;
+        width: 160px;
+        position: absolute;
+        bottom: 50px;
+        left: 50px;
+        color: rgb(255, 255, 255);
+        font-size: 60px;
+        font-weight: bolder;
+        text-align: center;
+        background-color: rgba($color: #ffffff, $alpha: 0.5);
+        border: 1px solid white; 
+    }
+
+    .messege_bomb_limit {
+        width: 500px;
+        height: 100px;
+        margin: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: red;
+        font-size: 100px;
+        font-weight: bolder;
+        text-align: center;
+    }
 }
 
 
