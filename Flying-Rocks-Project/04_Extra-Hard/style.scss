@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor:url(images/sniper.png), auto;
+}
+
+body{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(images/Background.jpg);
+    
+    .rock{
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        transition: 
+            top 5s ease-in-out,
+            left 5s ease-in-out;
+            user-select: none;
+        img{
+            width: 100%;
+            height: 100%;
+            animation-name: rotate360;
+            animation: 10s rotate360 infinite linear;
+        }
+    }
+    .bomb-holder{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        .bomb-image{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .explode-holder{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        .explode-image{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+
+@keyframes rotate360 {
+    to {
+        transform: rotate(360deg);
+    }
+}
