@@ -34,11 +34,8 @@ function setRocksRandomPosition(rocks) {
 // Returns array with random (X,Y) point
 function getRandomPosition(rocks) {
     /* Explanation randomPosition varibale:
-
     // randomPosition is an array.
-
     // randomPosition[0] - Represents left/X axies (Random Value between 0 - body width)
-
     // randomPosition[1] - Represents top/Y axies (Random Value between 0 - body height)*/
     var randomPosition = [Math.floor(Math.random() * body.offsetWidth),
         Math.floor(Math.random() * body.offsetHeight)];
@@ -53,13 +50,9 @@ function getRandomPosition(rocks) {
     }
     return randomPosition;
     /* Explanation if statement:
-
     // if random X axies + rockWidth bigger than body width
-
     // true: reduce from random X axies the rockWidth
-
     // if random Y axies + rockHeight bigger than body height
-
     // true: reduce from random Y axies the rockHeight */
 }
 // Function:
@@ -114,6 +107,7 @@ function getRandomNumber(max) {
 // Gets rocks index number and bomb index
 // removes rock and bomb at indexes given
 // spliced the bomb array to make room for more bombs
+// lower game over count by 1
 function removeRockAndBomb(rockIndex, bombIndex) {
     allRocks[rockIndex].remove();
     bombArray[bombIndex].remove();
@@ -148,7 +142,8 @@ function createExplotion(rockIndex) {
 }
 // Function
 // Gets mouse event
-// Checks if
+// Checks if less then 5 bombs are in ther array.
+// if true
 // Creates:
 // 1. bombHolder => div Element
 // 2. bombImage => image Element
@@ -219,9 +214,7 @@ function checkCollision(bombs) {
     }
 }
 // Event Listener when click
-// Checks if: rockLeftPosition <= *MouseXPosition* <= rockLeftPosition + rockWidth
-// Checks if: rockRightPosition <= *MouseYPosition* <= rockRightPosition + rockHeight
-// true: remove rock
+// creates bomb if game over let is not 0
 body.addEventListener('click', function (ev) {
     ev.stopPropagation();
     if (gameOver > 0) {
@@ -232,11 +225,6 @@ body.addEventListener('click', function (ev) {
 // Change the cursor to sniper
 // function cursorChange() {
 document.body.style.cursor = "url(images/sniper.png), auto";
-// allRocks.forEach(element =>
-//     element.style.cursor = "url(images/sniper.png), auto");
-// bombArray.forEach(element =>
-//     element.style.cursor = "url(images/sniper.png), auto");
-// }
 // Function:
 // Gets an array of rocks
 // for each rock:
@@ -264,6 +252,8 @@ function setTime() {
         clearInterval();
     }
 }
+// Function:
+// adds 0 to timer numbers f the number is 1 digit
 function addingZero(sec) {
     var secString = sec + "";
     if (secString.length < 2) {
@@ -273,6 +263,7 @@ function addingZero(sec) {
         return secString;
     }
 }
+// Game setup and intervals
 startGame();
 setRandomRockSize(allRocks);
 setRandomRotation(allRocks);
@@ -280,6 +271,10 @@ setTimeout(startGame, 500);
 setInterval(startGame, 5000);
 setInterval(checkGameOver, 100);
 setInterval(setTime, 1000);
+// Function:
+// checks if game is over 
+// False - checks for collisions
+// True - prints "game over" with timer results
 function checkGameOver() {
     if (gameOver > 0) {
         setInterval(mineDetection, 10);
@@ -288,6 +283,8 @@ function checkGameOver() {
         messegeBombLimit.innerHTML = "Game Over " + winningTime(totalSeconds);
     }
 }
+// Function:
+// Checks the seconds that passed var and prints out the winning time. 
 function winningTime(winnerTime) {
     var minutes = Math.floor(winnerTime / 60);
     var seconds = winnerTime % 60;
