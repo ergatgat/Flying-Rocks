@@ -10,6 +10,7 @@ var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var totalSeconds = 0;
 var messegeBombLimit = document.querySelector('.messege_bomb_limit');
+var gameOver = 10;
 // Function:
 // Moving rocks
 function startGame() {
@@ -33,8 +34,11 @@ function setRocksRandomPosition(rocks) {
 // Returns array with random (X,Y) point
 function getRandomPosition(rocks) {
     /* Explanation randomPosition varibale:
+
     // randomPosition is an array.
+
     // randomPosition[0] - Represents left/X axies (Random Value between 0 - body width)
+
     // randomPosition[1] - Represents top/Y axies (Random Value between 0 - body height)*/
     var randomPosition = [Math.floor(Math.random() * body.offsetWidth),
         Math.floor(Math.random() * body.offsetHeight)];
@@ -49,9 +53,13 @@ function getRandomPosition(rocks) {
     }
     return randomPosition;
     /* Explanation if statement:
+
     // if random X axies + rockWidth bigger than body width
+
     // true: reduce from random X axies the rockWidth
+
     // if random Y axies + rockHeight bigger than body height
+
     // true: reduce from random Y axies the rockHeight */
 }
 // Function:
@@ -110,6 +118,7 @@ function removeRockAndBomb(rockIndex, bombIndex) {
     allRocks[rockIndex].remove();
     bombArray[bombIndex].remove();
     bombArray.splice(bombIndex, 1);
+    gameOver--;
     // allRocks.splice(rockIndex, 1)
     return bombArray;
 }
@@ -145,12 +154,12 @@ function createExplotion(rockIndex) {
 // 2. bombImage => image Element
 // 3. Sets bombHolder Position to Mouse click
 // Returns: bombArray => array with all bombs (divs)
-// 
+//
 function createBomb(ev) {
     if (bombArray.length < 5) {
         bombsUsed += 1;
         counterHolder.innerText = "" + bombsUsed;
-        var bomb = document.createElement('div'); // Creating div element 
+        var bomb = document.createElement('div'); // Creating div element
         bomb.classList.add('bomb-holder'); // Adding class to div
         bombArray.push(bomb); // Appending bomb to bombArray
         body.appendChild(bomb); // Appending bomb to body
@@ -215,10 +224,12 @@ function checkCollision(bombs) {
 // true: remove rock
 body.addEventListener('click', function (ev) {
     ev.stopPropagation();
-    createBomb(ev);
+    if (gameOver > 0) {
+        createBomb(ev);
+    }
 });
 // DOM to body:
-// Change the cursor to sniper 
+// Change the cursor to sniper
 // function cursorChange() {
 document.body.style.cursor = "url(images/sniper.png), auto";
 // allRocks.forEach(element =>
@@ -243,10 +254,15 @@ function setRandomRockSize(rocks) {
 // changes html counter text to the second that passed
 // runs adding zero on each vaule to see if zero is needded at timer
 function setTime() {
-    ++totalSeconds;
-    secondsLabel.innerHTML = addingZero(totalSeconds % 60);
-    var minuteVal = Math.floor(totalSeconds / 60);
-    minutesLabel.innerHTML = addingZero(minuteVal);
+    if (gameOver > 0) {
+        ++totalSeconds;
+        secondsLabel.innerHTML = addingZero(totalSeconds % 60);
+        var minuteVal = Math.floor(totalSeconds / 60);
+        minutesLabel.innerHTML = addingZero(minuteVal);
+    }
+    else if (gameOver === 0) {
+        clearInterval();
+    }
 }
 function addingZero(sec) {
     var secString = sec + "";
@@ -257,11 +273,25 @@ function addingZero(sec) {
         return secString;
     }
 }
-console.log('test');
 startGame();
 setRandomRockSize(allRocks);
 setRandomRotation(allRocks);
 setTimeout(startGame, 500);
 setInterval(startGame, 5000);
-setInterval(mineDetection, 10);
+setInterval(checkGameOver, 100);
 setInterval(setTime, 1000);
+function checkGameOver() {
+    if (gameOver > 0) {
+        setInterval(mineDetection, 10);
+    }
+    else if (gameOver === 0) {
+        messegeBombLimit.innerHTML = "Game Over " + winningTime(totalSeconds);
+    }
+}
+function winningTime(winnerTime) {
+    var minutes = Math.floor(winnerTime / 60);
+    var seconds = winnerTime % 60;
+    var winnnerSec = addingZero(seconds);
+    var winnerMin = addingZero(minutes);
+    return winnerMin + ":" + winnnerSec;
+}
