@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neonderthaw&family=Open+Sans:wght@300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="dist/style.css">
+    <script src="https://kit.fontawesome.com/202bcec69b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!-- Header-->
+    <div class="header_wrapper">
+
+        <img
+            src="https://dw0i2gv3d32l1.cloudfront.net/uploads/stage/stage_image/102805/optimized_large_thumb_stage.jpg">
+        <h1>Tea Leaf Shop</h1>
+        <div class="wrapper_logo">
+            <img src="https://burgus.co.il/wp-content/themes/bbb-final/dist/img/black_youtube.png" alt="יוטיוב">
+            <img src="https://burgus.co.il/wp-content/themes/bbb-final/dist/img/black_facebook.png" alt="פייסבוק">
+            <img src="https://burgus.co.il/wp-content/themes/bbb-final/dist/img/black_inst.png" alt="אינסטגראם">
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html">
+            <h5>HOME</h5>
+        </a>
+        <a href="sale.html">
+            <h5>SHOP</h5>
+        </a>
+        <a href="">
+            <h5>BUNDLES (Coming Soon!)</h5>
+        </a>
+        <a href="">
+            <h5>TEA</h5>
+        </a>
+        <a href="FAQ.html">
+            <h5>FAQ</h5>
+        </a>
+        <a href="">
+            <h5>SUBSCRIPTION</h5>
+        </a>
+        <a href="">
+            <h5>MANAGER</h5>
+        </a>
+    </nav>
+    <form id="boss" onsubmit="checkFeilds(event)">
+        <h5 id="form_head">If you are the site manager, please sign in here:</h5>
+        <div class="user">
+            <label id="user">Username:</label>
+            <input type="text">
+        </div>
+        <div class="passy"><label id="pass">Password:</label>
+            <input type="password" name="passwordn" id="passid">
+        </div>
+
+        <button id="sub" type="submit">Enter</button>
+    </form>
+
+    <script src="./dist/app.js"></script>
+</body>
+
+</html>
