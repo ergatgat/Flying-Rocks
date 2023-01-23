@@ -1,6 +1,6 @@
 const body: HTMLBodyElement = document.querySelector('body');
 const allRocks: NodeListOf<HTMLDivElement> = document.querySelectorAll('.rock');
-
+console.log("body")
 body.style.backgroundImage = `url(images/Background.jpg)`
 
 function startGame() {
